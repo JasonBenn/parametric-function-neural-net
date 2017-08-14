@@ -13,7 +13,7 @@ weights = tf.get_variable("w", shape=[4, 1])
 yhat = tf.squeeze(tf.matmul(f, weights), 1) # unclear what squeeze does
 
 # Create some training data
-xs = np.random.uniform(-100, 100, size=500)
+xs = np.random.uniform(-10, 10, size=500)
 ys = -0.5 * np.power(xs, 3) + 2 * np.square(xs) + xs - 5
 
 # Loss function
@@ -26,7 +26,7 @@ train = tf.train.AdamOptimizer(0.1).minimize(loss)
 sess = tf.Session()
 sess.run(tf.global_variables_initializer())  # don't know what this does either
 
-for i in xrange(10000):
+for i in xrange(1000):
   _, loss_val = sess.run([train, loss], { x: xs, y: ys })
   if i % 100 == 0:
     print "After epoch %i: %i" % (i, loss_val)
